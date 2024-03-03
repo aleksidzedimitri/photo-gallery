@@ -64,14 +64,14 @@ export default function HomePage() {
       const termFromHistory = location.state.term;
       setSearchInput(termFromHistory);
       setDebouncedSearchTerm(termFromHistory);
-      dispatch(addSearchTerm(termFromHistory));
     }
   }, [location, dispatch]);
 
   useEffect(() => {
+    setPhotos([]);
+
     const handler = setTimeout(() => {
       if (searchInput.trim()) {
-        setPhotos([]);
         dispatch(addSearchTerm(searchInput));
         setDebouncedSearchTerm(searchInput);
       }
