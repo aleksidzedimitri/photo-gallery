@@ -41,9 +41,13 @@ export default function HomePage() {
       setLikes(selectedPhoto.likes);
       setSelectedPhotoId(photoId);
       setSelectedImage(imageUrl);
-      modalRef.current?.open();
     }
   };
+  useEffect(() => {
+    if (selectedPhotoId) {
+      modalRef.current?.open();
+    }
+  }, [selectedPhotoId]);
 
   const closeModal = () => {
     setSelectedImage("");
@@ -115,13 +119,13 @@ export default function HomePage() {
         className="mt-8"
       />
       <div className="mt-16">
-        {photos.map((photo) => (
+        {photos.map((photo, index) => (
           <img
-            key={photo.id}
+            key={index}
             src={photo.urls.regular}
             alt={photo.alt_description}
             onClick={() => openModal(photo.id, photo.urls.regular)}
-            className="cursor-pointer"
+            className="cursor-pointer mb-8"
           />
         ))}
         {isLoading && <p>Loading...</p>}
